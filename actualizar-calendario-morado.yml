@@ -1,0 +1,113 @@
+name: Actualizar calendario morado
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 7 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  calendario:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Generar calendario con datos oficiales de GitHub
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const username = 'Daiza128';
+            const result = await github.graphql(`
+              query($login: String!) {
+                user(login: $login) {
+                  contributionsCollection {
+                    contributionCalendar {
+                      totalContributions
+                      weeks {
+                        contributionDays {
+                          date
+                          weekday
+                          contributionCount
+                          contributionLevel
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `, { login: username });
+
+            const calendar = result.user?.contributionsCollection?.contributionCalendar;
+            if (!calendar?.weeks?.length) {
+              throw new Error('GitHub no devolvió datos del calendario.');
+            }
+
+            const colors = {
+              NONE: '#161b22',
+              FIRST_QUARTILE: '#3b0764',
+              SECOND_QUARTILE: '#6b21a8',
+              THIRD_QUARTILE: '#9333ea',
+              FOURTH_QUARTILE: '#d8b4fe'
+            };
+            const weeks = calendar.weeks;
+            const left = 54;
+            const top = 56;
+            const step = 13;
+            const width = left + weeks.length * step + 16;
+            const height = 185;
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            const months = [];
+            const squares = [];
+            for (let wi = 0; wi < weeks.length; wi++) {
+              for (const day of weeks[wi].contributionDays) {
+                const x = left + wi * step;
+                const y = top + day.weekday * step;
+                const color = colors[day.contributionLevel] || colors.NONE;
+                squares.push(
+                  `<rect x="${x}" y="${y}" width="10" height="10" rx="2" fill="${color}">` +
+                  `<title>${day.date}: ${day.contributionCount} contributions</title></rect>`
+                );
+                if (day.date.endsWith('-01')) {
+                  const month = Number(day.date.slice(5, 7)) - 1;
+                  months.push(`<text x="${x}" y="46" fill="#c9d1d9" font-size="12">${monthNames[month]}</text>`);
+                }
+              }
+            }
+            if (!squares.length) throw new Error('GitHub devolvió un calendario vacío.');
+
+            const days = [
+              `<text x="16" y="${top + step + 9}" fill="#8b949e" font-size="11">Mon</text>`,
+              `<text x="16" y="${top + 3 * step + 9}" fill="#8b949e" font-size="11">Wed</text>`,
+              `<text x="16" y="${top + 5 * step + 9}" fill="#8b949e" font-size="11">Fri</text>`
+            ];
+            const legend = [colors.NONE, colors.FIRST_QUARTILE, colors.SECOND_QUARTILE,
+                            colors.THIRD_QUARTILE, colors.FOURTH_QUARTILE]
+              .map((color, i) => `<rect x="${width - 140 + i * 16}" y="158" width="11" height="11" rx="2" fill="${color}"/>`)
+              .join('');
+
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Calendario de contribuciones de ${username}">
+              <rect width="100%" height="100%" rx="12" fill="#0d1117"/>
+              <text x="16" y="24" fill="#c084fc" font-family="Arial,sans-serif" font-size="16" font-weight="bold">${calendar.totalContributions} contributions in the last year</text>
+              <g font-family="Arial,sans-serif">${months.join('')}${days.join('')}${squares.join('')}
+              <text x="${width - 172}" y="167" fill="#8b949e" font-size="11">Less</text>
+              ${legend}<text x="${width - 50}" y="167" fill="#8b949e" font-size="11">More</text></g>
+            </svg>`;
+
+            fs.mkdirSync('assets', { recursive: true });
+            fs.writeFileSync('assets/contributions-purple.svg', svg, 'utf8');
+
+      - name: Guardar calendario actualizado
+        run: |
+          git add assets/contributions-purple.svg
+          if git diff --cached --quiet; then
+            echo "El calendario no ha cambiado."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "Update purple contributions calendar"
+          git push
