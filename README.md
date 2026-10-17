@@ -74,7 +74,7 @@ Technology
 
 <div align="center">
 
-##[ TECH STACK ]
+## [ TECH STACK ]
 
 ### Languages & Technologies
 
