@@ -1,7 +1,7 @@
 
 <div align="center">
 
-# DANNA ISABEL ZAMBRANO 
+# DANNA ISABEL ZAMBRANO
 
 ### ✨ SYSTEMS ENGINEERING STUDENT ✨
 
@@ -9,11 +9,15 @@
 
 <br>
 
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=21&duration=3200&pause=1000&color=C084FC&center=true&vCenter=true&repeat=true&width=650&height=50&lines=Exploring+Cybersecurity+and+AI;Building+with+Python+and+Java;Combining+Technology+and+Creativity;Always+learning+something+new" alt="Typing Animation"/>
+
+<br>
+
 ![Status](https://img.shields.io/badge/STATUS-LEARNING-c084fc?style=for-the-badge&labelColor=21112e)
 ![Mode](https://img.shields.io/badge/MODE-CODING-a855f7?style=for-the-badge&labelColor=21112e)
 ![Passion](https://img.shields.io/badge/PASSION-TECHNOLOGY-d8b4fe?style=for-the-badge&labelColor=21112e)
 
-<br>
+<br><br>
 
 <img src="https://raw.githubusercontent.com/Daiza128/Daiza128/main/Star%20GIF.gif" alt="Anime girl with sparkling eyes" width="350"/>
 
@@ -61,14 +65,14 @@ Technology
 ## [ ABOUT ME ]
 
 - Systems Engineering student at Universidad Icesi
--  Passionate about technology and creativity
--  Exploring software development and databases
+- Passionate about technology and creativity
+- Exploring software development and databases
 - Interested in cybersecurity and digital security
--  Curious about Artificial Intelligence
--  Interested in UI/UX Design
--  Always learning something new
--  I love playing the piano
--  Singing and music are part of my life
+- Curious about Artificial Intelligence
+- Interested in UI/UX Design
+- Always learning something new
+- I love playing the piano
+- Singing and music are part of my life
 
 ---
 
@@ -116,6 +120,10 @@ Technology
 
 <br>
 
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3500&pause=1200&color=D8B4FE&center=true&vCenter=true&repeat=true&width=600&height=45&lines=Piano%2C+Singing+and+Music;Creativity+and+Technology;Passionate+about+learning+new+things" alt="Hobbies Typing Animation"/>
+
+<br>
+
 *I believe creativity and technology can create amazing things.*
 
 </div>
@@ -124,11 +132,13 @@ Technology
 
 <div align="center">
 
-<h2 align="center">[ GITHUB STATS ]</h2>
+## [ MY GITHUB ]
 
-<p align="center">
-  <img src="https://img.shields.io/github/followers/Daiza128?style=for-the-badge&color=9333ea&labelColor=21112e&label=Followers" alt="GitHub Followers" />
-</p>
+<br>
+
+<a href="https://github.com/Daiza128?tab=repositories">
+  <img src="https://img.shields.io/badge/EXPLORE-MY%20PROJECTS-9333ea?style=for-the-badge&labelColor=21112e&logo=github&logoColor=white" alt="My GitHub Projects"/>
+</a>
 
 </div>
 
