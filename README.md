@@ -124,11 +124,11 @@ Technology
 
 <div align="center">
 
-## [ GITHUB STATS ]
+<h2 align="center">[ GITHUB STATS ]</h2>
 
-<br>
-
-<img src="https://komarev.com/ghpvc/?username=Daiza128&color=9333ea&style=for-the-badge&label=PROFILE+VIEWS" alt="Profile views"/>
+<p align="center">
+  <img src="https://img.shields.io/github/followers/Daiza128?style=for-the-badge&color=9333ea&labelColor=21112e&label=Followers" alt="GitHub Followers" />
+</p>
 
 </div>
 
